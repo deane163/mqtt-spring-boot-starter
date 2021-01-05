@@ -35,6 +35,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Indexed
-public @interface MessagehandlerAnnotation {
+public @interface MessageHandlerAnnotation {
 
 }

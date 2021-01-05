@@ -1,9 +1,5 @@
 package com.xiaoshu.service;
 
-import com.xiaoshu.annotaion.MessagehandlerAnnotation;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.stereotype.Component;
@@ -38,14 +34,16 @@ import org.springframework.stereotype.Component;
 @Component(value = "defaultMessageHandler")
 public class DefaultReceivedMessageHandler implements MessageHandler {
 
+    /**
+     * 默认的消息处理 Handler
+     * @param message
+     */
     @Override
     public void handleMessage(Message<?> message) {
-        System.out.println("收到订阅消息: ==>" + message);
         String topic = message.getHeaders().get("mqtt_receivedTopic").toString();
-        System.out.println("消息主题：==>" + topic);
         Object payLoad = message.getPayload();
         // 如果不设置转换器这里强转byte[]会报错
         byte[] data = (byte[]) payLoad;
-        System.out.println("Message is : ==> "  + new String(data));
+        System.out.println("[defaultMessageHandler] topic：" + topic +" Message : " + new String(data));
     }
 }
